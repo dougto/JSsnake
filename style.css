@@ -1,0 +1,33 @@
+.snake {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 302px;
+    left: 302px;
+    background-color: white;
+}
+
+.background {
+    position: absolute;
+    height: 600px;
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -300px;
+    background-color: black;
+}
+
+.text {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: 30%;
+    left: 20%;
+    font-size: 40px;
+}
+
+.score {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+}
