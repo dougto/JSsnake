@@ -89,6 +89,9 @@ function startGame() {
     snakeHead.isDead = false;
     snakeHead.position = [302,302];
     snake = [snakeHead];
+    snake.push(new snakeBodyConstructor([272,302],1));
+    snake.push(new snakeBodyConstructor([242,302],1));
+    console.log(snake);
     setPosition(document.querySelector('.snake'));
 }
 
