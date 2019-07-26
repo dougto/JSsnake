@@ -4,7 +4,12 @@ const snakeHead = {
     isDead: false,
 };
 
-let step, score, clock, pause;
+const snakeBodyConstructor = function(startingPosition, direction) {
+    this.position = startingPosition;
+    this.direction = direction;
+}
+
+let step, score, clock, pause, snake;
 let hasStarted = false;
 
 document.addEventListener('keypress', (e) => {
@@ -14,28 +19,27 @@ document.addEventListener('keypress', (e) => {
         return;
     }
     switch(e.keyCode){
-        case 119:   // up
+        case 119:   // up (W)
             snakeHead.direction = 4;
             break;
-        case 115:   // down
+        case 115:   // down (S)
             snakeHead.direction = 2;
             break;
-        case 97:    // left
+        case 97:    // left (A)
             snakeHead.direction = 3;
             break;
-        case 100:   // right
+        case 100:   // right (R)
             snakeHead.direction = 1;
             break;
-        case 112:   // pause
+        case 112:   // pause (P)
             pause = pause? false : true;
             break;
     }
 });
 
-function setPosition() {
-    let snakeDiv = document.querySelector('.snake');
-    snakeDiv.style.left = snakeHead.position[0];
-    snakeDiv.style.top = snakeHead.position[1];
+function setPosition(object) {
+    object.style.left = snakeHead.position[0];
+    object.style.top = snakeHead.position[1];
 }
 
 function nextFrame() {
@@ -55,7 +59,7 @@ function nextFrame() {
     }
     checkDeath();
     if(!snakeHead.isDead){
-        setPosition();
+        setPosition(document.querySelector('.snake'));
     }
 }
 
@@ -77,12 +81,15 @@ function processDeath() {
 
 function startGame() {
     step = 1; score = 0; clock = 400; pause = false; hasStarted = true; 
-    snakeHead.isDead = false;
-    snakeHead.position = [302,302];
-    setPosition();
+
     snakeHead.direction = 1;
     let text = document.querySelector('.text');
     text.style.display = 'none';
+
+    snakeHead.isDead = false;
+    snakeHead.position = [302,302];
+    snake = [snakeHead];
+    setPosition(document.querySelector('.snake'));
 }
 
 async function mainLoop(){
